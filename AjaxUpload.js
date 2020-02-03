@@ -229,6 +229,11 @@
                 if (p._settings.autoSubmit) {
                     var myFormData = new FormData();
 					myFormData.append( p._inputData.name, $(d)[0].files[0]);
+					if(typeof p._inputData.data !=='undefined'){
+						$.each(p._inputData.data,function(key,input){
+							myFormData.append(key,input);
+						});
+					}
 					this._inputElement = myFormData;
 					p.submit(this._inputElement)
                 }
@@ -302,7 +307,7 @@
                 var q = this._createIframe();
                 var t = this._createForm(q);
                 t.appendChild(this._input);
-                
+                console.log("AJAX UPLOAD");
 //                t.submit();
                 jQuery.ajax({
                     type:  this._inputData.type||'POST',
